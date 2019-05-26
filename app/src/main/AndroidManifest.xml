@@ -10,7 +10,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".NoteEditActivity"
+                  android:label="Edit note"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".SettingsActivity">
         </activity>
         <activity android:name=".LoginCodeActivity">

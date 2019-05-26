@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NoteEditActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+        >
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/activity_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_note"
+                        android:layout_marginTop="6sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@android:color/white" android:textSize="30sp"
+                        tools:ignore="RelativeOverlap"/>
+                <ImageButton
+                        android:id="@+id/ibCustomSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@android:drawable/ic_menu_save"
+                        android:contentDescription="@string/settings"
+                        android:layout_marginEnd="20sp"
+                        android:layout_alignParentEnd="true"
+                />
+                <ImageButton
+                        android:id="@+id/ibCustomCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@android:drawable/ic_input_delete"
+                        android:contentDescription="@string/settings"
+                        android:layout_marginEnd="20sp"
+                        android:layout_toStartOf="@id/ibCustomSave"
+                />
+                <ImageButton
+                        android:id="@+id/ibCustomDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@android:drawable/ic_delete"
+                        android:contentDescription="@string/settings"
+                        android:layout_marginEnd="20sp"
+                        android:layout_toStartOf="@id/ibCustomCancel"
+                />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--suppress AndroidDomInspection -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_notes_list"
+            tools:context=".NotesListActivity"
+            android:orientation="vertical"
+            android:padding="50dp">
+
+        <TextView
+                android:id="@+id/serveText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi!"
+                android:textSize="20sp"
+                android:layout_marginBottom="40sp"
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="24sp"
+        />
+
+        <EditText
+                android:id="@+id/inputNoteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                tools:ignore="Autofill,LabelFor,TextFields"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text"
+                android:textSize="24sp"
+        />
+
+        <EditText
+                android:id="@+id/inputNoteText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                tools:ignore="Autofill,LabelFor,TextFields"/>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40sp">
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deadline"
+                    android:textSize="24sp"
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

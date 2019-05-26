@@ -9,11 +9,11 @@ data class NoteModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    val title: String,
+    var title: String,
 
-    val text: String,
+    var text: String,
 
-    val deadline: Long
+    var deadline: Long
 ) {
 
     @Ignore
