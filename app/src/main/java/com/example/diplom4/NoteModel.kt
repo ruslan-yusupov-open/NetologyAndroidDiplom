@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class NoteModel(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     val title: String,
@@ -18,8 +18,4 @@ data class NoteModel(
 
     @Ignore
     constructor() : this(0, "", "", 0)
-
-    fun iptext(): String {
-        return text
-    }
 }
