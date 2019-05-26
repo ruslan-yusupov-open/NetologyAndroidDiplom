@@ -7,4 +7,6 @@
     <string name="text">Text</string>
     <string name="deadline">deadline</string>
     <string name="new_note">New note</string>
+    <string name="new_pin_code">NEW PIN CODE</string>
+    <string name="notes_list">Notes list</string>
 </resources>

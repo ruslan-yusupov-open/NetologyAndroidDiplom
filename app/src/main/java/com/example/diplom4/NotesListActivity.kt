@@ -29,72 +29,37 @@ class NotesListActivity : AppCompatActivity() {
             NoteDatabase::class.java, "database"
         ).allowMainThreadQueries().build()
 
-
         val listView = findViewById<ListView>(R.id.list)
 
-        val note1 = NoteModel(0, "aaa1", "bbbccc", 0)
+        prepareData()
+        initList(listView)
 
-        try {
-            db.noteDao().insert(note1)
-        } catch (e: Exception) {
-            Toast.makeText(this@NotesListActivity, "some error", Toast.LENGTH_LONG).show()
-        }
+        floatingAddButton.setOnClickListener { addButtonOnClickListener() }
+        ibCustomSettings.setOnClickListener { settingsButtonOnClickListener() }
+    }
 
-        notes = db.noteDao().all
-        prepareContent(notes)
-
+    private fun initList(listView: ListView) {
         listContentAdapter = createAdapter()
         listView.adapter = listContentAdapter
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             listItemOnClickListener(position)
         }
-
-        fab.setOnClickListener { addButtonOnClickListener() }
     }
 
     private fun listItemOnClickListener(position: Int) {
         val intent = Intent(this@NotesListActivity, NoteEditActivity::class.java)
         intent.putExtra("noteId", notes[position].id)
         startActivity(intent)
-
-        /*
-        try {
-            simpleAdapterContent.removeAt(position)
-            db.noteDao().delete(notes[position])
-            notes = db.noteDao().all
-
-            Toast.makeText(this@NotesListActivity, "Position $position removed", Toast.LENGTH_LONG).show()
-
-            listContentAdapter.notifyDataSetChanged()
-        } catch (e: Exception) {
-            Toast.makeText(
-                this@NotesListActivity,
-                "some error $notes $position", Toast.LENGTH_LONG
-            ).show()
-        }*/
     }
 
     private fun addButtonOnClickListener() {
         val intent = Intent(this@NotesListActivity, NoteEditActivity::class.java)
         startActivity(intent)
+    }
 
-        /*
-//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//            .setAction("Action", null).show()
-//
-//        val newNote = NoteModel(0, "aaa1", Date().toString(), 0)
-//
-//        try {
-//            db.noteDao().insert(newNote)
-//            Toast.makeText(this@NotesListActivity, "inserted", Toast.LENGTH_LONG).show()
-//
-//            notes = db.noteDao().all
-//            prepareContent(notes)
-//            listContentAdapter.notifyDataSetChanged()
-//        } catch (e: Exception) {
-//            Toast.makeText(this@NotesListActivity, "some error", Toast.LENGTH_LONG).show()
-//        }
-        */
+    private fun settingsButtonOnClickListener() {
+        val intent = Intent(this@NotesListActivity, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun createAdapter(): BaseAdapter {
@@ -122,9 +87,13 @@ class NotesListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        prepareData()
+        listContentAdapter.notifyDataSetChanged()
+    }
+
+    private fun prepareData() {
         notes = db.noteDao().all
         prepareContent(notes)
-        listContentAdapter.notifyDataSetChanged()
     }
 
     companion object {

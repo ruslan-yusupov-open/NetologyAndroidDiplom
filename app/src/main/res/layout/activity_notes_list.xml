@@ -23,12 +23,14 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Notes list"
+                        android:text="@string/notes_list"
                         android:layout_marginTop="6sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textColor="@android:color/white" android:textSize="30sp"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp"
+                        tools:ignore="RelativeOverlap"/>
                 <ImageButton
-                        android:id="@+id/ibCustomBack"
+                        android:id="@+id/ibCustomSettings"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
@@ -46,7 +48,7 @@
     <include layout="@layout/content_notes_list"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/floatingAddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
