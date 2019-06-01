@@ -10,7 +10,7 @@
         tools:context=".NotesListActivity">
 
     <ListView
-            android:id="@+id/list"
+            android:id="@+id/notesListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"

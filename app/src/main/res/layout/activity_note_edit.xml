@@ -13,7 +13,7 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/mainToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -136,10 +136,13 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/deadlineLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40sp">
+                    android:visibility="gone"
+                    android:layout_marginTop="40sp"
+                    tools:visibility="visible">
                 <EditText
                         android:id="@+id/deadlineEditText"
                         android:layout_width="0dp"

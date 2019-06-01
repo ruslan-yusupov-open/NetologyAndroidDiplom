@@ -2,11 +2,14 @@ package com.example.diplom4
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.BaseAdapter
+import android.widget.ListView
+import android.widget.SimpleAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_notes_list.*
+import kotlinx.android.synthetic.main.content_notes_list.*
 import java.util.*
 
 class NotesListActivity : AppCompatActivity() {
@@ -21,18 +24,15 @@ class NotesListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mainToolbar)
 
         db = Room.databaseBuilder(
             applicationContext,
             NoteDatabase::class.java, "database"
         ).allowMainThreadQueries().build()
 
-        val listView = findViewById<ListView>(R.id.list)
-
         prepareData()
-        initList(listView)
+        initList(notesListView)
 
         floatingAddButton.setOnClickListener { addButtonOnClickListener() }
         ibCustomSettings.setOnClickListener { settingsButtonOnClickListener() }
