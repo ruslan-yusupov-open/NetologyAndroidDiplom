@@ -1,6 +1,7 @@
 package com.example.diplom4
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
@@ -12,21 +13,23 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class NoteEditActivity : AppCompatActivity() {
 
-    var isNew = true
+    private var isNew = true
     private lateinit var noteForEdit: NoteModel
     private lateinit var db: NoteDatabase
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_edit)
 
         initNodeForEdit()
         initTooltipButtons()
+        initForm()
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun initForm() {
         noteTitleEditText.setText(noteForEdit.title)
         noteTextEditText.setText(noteForEdit.text)
 
@@ -58,8 +61,6 @@ class NoteEditActivity : AppCompatActivity() {
         deadlineCheckbox.setOnClickListener {
             deadlineLayout.visibility = if (deadlineCheckbox.isChecked) View.VISIBLE else View.GONE
         }
-
-        serveTextView.text = noteForEdit.toString()
     }
 
     private fun initNodeForEdit() {
@@ -87,42 +88,57 @@ class NoteEditActivity : AppCompatActivity() {
             customDeleteImageButton.visibility = View.GONE
         } else {
             customDeleteImageButton.setOnClickListener {
-                db.noteDao().delete(noteForEdit)
-                Toast.makeText(this@NoteEditActivity, "Note removed", Toast.LENGTH_LONG).show()
-                finish()
+                val builder = AlertDialog.Builder(this)
+
+                builder.setMessage("Do you want to delete this note?")
+                    .setTitle("Warning!")
+
+                builder.setPositiveButton("YES") { _, _ -> deleteNote() }
+
+                builder.setNegativeButton("NO") { _, _ -> }
+
+                builder.create().show()
             }
         }
 
-        customSaveImageButton.setOnClickListener {
-            noteForEdit.title = noteTitleEditText.text.toString()
-            noteForEdit.text = noteTextEditText.text.toString()
-            val deadlineText = deadlineEditText.text.toString()
+        customSaveImageButton.setOnClickListener { clickSaveForm() }
+    }
 
-            try {
-                if (deadlineText == "" || !deadlineCheckbox.isChecked) {
-                    noteForEdit.deadline = 0
-                } else {
-                    val deadLineDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(deadlineText)
-                    Toast.makeText(this@NoteEditActivity, deadLineDate.toString(), Toast.LENGTH_LONG).show()
-                    noteForEdit.deadline = deadLineDate.time
-                }
-            } catch (e: ParseException) {
-                Toast.makeText(
-                    this@NoteEditActivity,
-                    "Can't parse date, use format yyyy-MM-dd (2019-01-01)", Toast.LENGTH_LONG
-                ).show()
-                return@setOnClickListener
-            }
+    private fun deleteNote() {
+        db.noteDao().delete(noteForEdit)
+        Toast.makeText(this@NoteEditActivity, "Note removed", Toast.LENGTH_LONG).show()
+        finish()
+    }
 
-            if (isNew) {
-                db.noteDao().insert(noteForEdit)
-                Toast.makeText(this@NoteEditActivity, "Note added", Toast.LENGTH_LONG).show()
+    private fun clickSaveForm() {
+        noteForEdit.title = noteTitleEditText.text.toString()
+        noteForEdit.text = noteTextEditText.text.toString()
+        val deadlineText = deadlineEditText.text.toString()
+
+        try {
+            if (deadlineText == "" || !deadlineCheckbox.isChecked) {
+                noteForEdit.deadline = 0
             } else {
-                db.noteDao().update(noteForEdit)
-                Toast.makeText(this@NoteEditActivity, "Note updated", Toast.LENGTH_LONG).show()
+                val deadLineDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(deadlineText)
+                Toast.makeText(this@NoteEditActivity, deadLineDate.toString(), Toast.LENGTH_LONG).show()
+                noteForEdit.deadline = deadLineDate.time
             }
-
-            finish()
+        } catch (e: ParseException) {
+            Toast.makeText(
+                this@NoteEditActivity,
+                "Can't parse date, use format yyyy-MM-dd (2019-01-01)", Toast.LENGTH_LONG
+            ).show()
+            return
         }
+
+        if (isNew) {
+            db.noteDao().insert(noteForEdit)
+            Toast.makeText(this@NoteEditActivity, "Note added", Toast.LENGTH_LONG).show()
+        } else {
+            db.noteDao().update(noteForEdit)
+            Toast.makeText(this@NoteEditActivity, "Note updated", Toast.LENGTH_LONG).show()
+        }
+
+        finish()
     }
 }
