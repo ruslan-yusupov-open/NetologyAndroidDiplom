@@ -99,7 +99,7 @@ class NoteEditActivity : AppCompatActivity() {
             val deadlineText = deadlineEditText.text.toString()
 
             try {
-                if (deadlineText == "") {
+                if (deadlineText == "" || !deadlineCheckbox.isChecked) {
                     noteForEdit.deadline = 0
                 } else {
                     val deadLineDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(deadlineText)

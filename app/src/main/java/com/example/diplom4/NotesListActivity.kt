@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_notes_list.*
 import kotlinx.android.synthetic.main.content_notes_list.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class NotesListActivity : AppCompatActivity() {
@@ -78,7 +79,8 @@ class NotesListActivity : AppCompatActivity() {
             val row = HashMap<String, String>()
             row[TITLE] = note.title
             row[TEXT] = note.text
-            row[DEADLINE] = note.deadline.toString()
+            row[DEADLINE] =
+                if (note.deadline > 0) SimpleDateFormat("yyyy-M-d", Locale.US).format(Date(note.deadline)) else ""
 
             simpleAdapterContent.add(row)
         }
