@@ -25,4 +25,5 @@
     <string name="back_arrow">←</string>
     <string name="circleblack">circleBlack</string>
     <string name="yellow_circle">Yellow circle</string>
+    <string name="save">SAVE</string>
 </resources>
