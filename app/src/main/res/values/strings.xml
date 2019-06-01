@@ -27,4 +27,5 @@
     <string name="yellow_circle">Yellow circle</string>
     <string name="save">SAVE</string>
     <string name="reset_pincode">Reset pincode</string>
+    <string name="settings">Settings</string>
 </resources>

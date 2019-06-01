@@ -24,7 +24,7 @@
                         android:id="@+id/activityTitleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_note"
+                        android:text="@string/settings"
                         android:layout_marginTop="6sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         android:textColor="@android:color/white" android:textSize="30sp"
