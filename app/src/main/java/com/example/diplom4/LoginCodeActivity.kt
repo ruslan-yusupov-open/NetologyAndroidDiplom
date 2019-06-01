@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_login_code.*
 
 class LoginCodeActivity : AppCompatActivity() {
 
-    var counter = 0
-    var pinString = ""
+    private var counter = 0
+    private var pinString = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class LoginCodeActivity : AppCompatActivity() {
         digit9Button.setOnClickListener(this::onClick)
         buttonDel.setOnClickListener { onClickDel() }
 
-        if (PincodeService(this).checkPin("") == null) {
+        if (!PincodeService(this).hasPin()) {
             Toast.makeText(this, "please set pincode", Toast.LENGTH_LONG).show()
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
@@ -75,19 +75,14 @@ class LoginCodeActivity : AppCompatActivity() {
     }
 
     private fun checkPinCode() {
-        val pinCheck = PincodeService(this).checkPin(pinString)
-
-        when {
-            pinCheck!! -> {
-                Toast.makeText(this, "pin code correct", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, NotesListActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            else -> {
-                Toast.makeText(this, "pin code wrong", Toast.LENGTH_LONG).show()
-                while (counter > 0) onClickDel()
-            }
+        if (PincodeService(this).checkPin(pinString)) {
+            Toast.makeText(this, "pin code correct", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, NotesListActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            Toast.makeText(this, "pin code wrong", Toast.LENGTH_LONG).show()
+            while (counter > 0) onClickDel()
         }
     }
 
