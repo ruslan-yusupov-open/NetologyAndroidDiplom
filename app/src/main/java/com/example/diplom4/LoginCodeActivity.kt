@@ -24,10 +24,12 @@ class LoginCodeActivity : AppCompatActivity() {
         digit7Button.setOnClickListener(this::onClick)
         digit8Button.setOnClickListener(this::onClick)
         digit9Button.setOnClickListener(this::onClick)
+        buttonDel.setOnClickListener(this::onClickDel)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onClick(it: View?) {
-        when (counter++) {
+        when (counter) {
             0 -> {
                 black1.visibility = View.GONE
                 yellow1.visibility = View.VISIBLE
@@ -48,5 +50,31 @@ class LoginCodeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        if (counter < 4) counter++
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    private fun onClickDel(it: View?) {
+        when (counter) {
+            4 -> {
+                black4.visibility = View.VISIBLE
+                yellow4.visibility = View.GONE
+            }
+            3 -> {
+                black3.visibility = View.VISIBLE
+                yellow3.visibility = View.GONE
+            }
+            2 -> {
+                black2.visibility = View.VISIBLE
+                yellow2.visibility = View.GONE
+            }
+            1 -> {
+                black1.visibility = View.VISIBLE
+                yellow1.visibility = View.GONE
+            }
+        }
+
+        if (counter > 0) counter--
     }
 }
