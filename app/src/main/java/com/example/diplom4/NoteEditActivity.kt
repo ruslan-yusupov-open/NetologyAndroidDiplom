@@ -48,11 +48,11 @@ class NoteEditActivity : AppCompatActivity() {
             datePickerDialog = DatePickerDialog(
                 this,
                 { _, year, monthOfYear, dayOfMonth ->
-                    deadlineEditText.setText("$year-$monthOfYear-$dayOfMonth")
+                    deadlineEditText.setText("$year-${monthOfYear + 1}-$dayOfMonth")
                     datePickerDialog.dismiss()
                 },
                 todayCalendar.get(Calendar.YEAR),
-                todayCalendar.get(Calendar.MONTH)+1,
+                todayCalendar.get(Calendar.MONTH),
                 todayCalendar.get(Calendar.DAY_OF_MONTH)
             )
             datePickerDialog.show()
