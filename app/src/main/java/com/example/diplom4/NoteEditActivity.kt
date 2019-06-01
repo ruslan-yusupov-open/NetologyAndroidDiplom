@@ -1,13 +1,15 @@
 package com.example.diplom4
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_note_edit.*
+import java.util.*
+
 
 class NoteEditActivity : AppCompatActivity() {
 
@@ -15,19 +17,38 @@ class NoteEditActivity : AppCompatActivity() {
     private lateinit var noteForEdit: NoteModel
     private lateinit var db: NoteDatabase
 
-    private lateinit var titleEditText: EditText
-    private lateinit var textEditText: EditText
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_edit)
 
+        initNodeForEdit()
+        initTooltipButtons()
+
+        noteTitleEditText.setText(noteForEdit.title)
+        noteTextEditText.setText(noteForEdit.text)
+
+        ibOpenCalendar.setOnClickListener {
+            val todayCalendar = Calendar.getInstance()
+            lateinit var datePickerDialog: DatePickerDialog
+            datePickerDialog = DatePickerDialog(
+                this,
+                { _, year, monthOfYear, dayOfMonth ->
+                    deadlineEditText.setText("$dayOfMonth.$monthOfYear.$year")
+                    datePickerDialog.dismiss()
+                },
+                todayCalendar.get(Calendar.YEAR),
+                todayCalendar.get(Calendar.MONTH),
+                todayCalendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+
+        serveTextView.text = noteForEdit.toString()
+    }
+
+    private fun initNodeForEdit() {
         val noteId = intent.getIntExtra("noteId", 0)
-
-        titleEditText = findViewById(R.id.inputNoteTitle)
-        textEditText = findViewById(R.id.inputNoteText)
-
-        findViewById<ImageButton>(R.id.ibCustomCancel).setOnClickListener { finish() }
 
         db = Room.databaseBuilder(
             applicationContext,
@@ -41,23 +62,25 @@ class NoteEditActivity : AppCompatActivity() {
         } else {
             noteForEdit = NoteModel()
         }
+    }
 
-        val deleteButton = findViewById<ImageButton>(R.id.ibCustomDelete)
+    private fun initTooltipButtons() {
+        customCancelImageButton.setOnClickListener { finish() }
 
         if (isNew) {
-            findViewById<TextView>(R.id.activity_title).text = getString(R.string.new_note)
-            deleteButton.visibility = View.GONE
+            activityTitleTextView.text = getString(R.string.new_note)
+            customDeleteImageButton.visibility = View.GONE
         } else {
-            deleteButton.setOnClickListener {
+            customDeleteImageButton.setOnClickListener {
                 db.noteDao().delete(noteForEdit)
                 Toast.makeText(this@NoteEditActivity, "Note removed", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
 
-        findViewById<ImageButton>(R.id.ibCustomSave).setOnClickListener {
-            noteForEdit.title = titleEditText.text.toString()
-            noteForEdit.text = textEditText.text.toString()
+        customSaveImageButton.setOnClickListener {
+            noteForEdit.title = noteTitleEditText.text.toString()
+            noteForEdit.text = noteTextEditText.text.toString()
 
             if (isNew) {
                 db.noteDao().insert(noteForEdit)
@@ -69,10 +92,5 @@ class NoteEditActivity : AppCompatActivity() {
 
             finish()
         }
-
-        titleEditText.setText(noteForEdit.title)
-        textEditText.setText(noteForEdit.text)
-
-        findViewById<TextView>(R.id.serveText).text = noteForEdit.toString()
     }
 }

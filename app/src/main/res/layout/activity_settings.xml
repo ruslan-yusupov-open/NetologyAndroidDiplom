@@ -21,7 +21,7 @@
         >
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/activity_title"
+                        android:id="@+id/activityTitleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_note"
@@ -30,7 +30,7 @@
                         android:textColor="@android:color/white" android:textSize="30sp"
                         tools:ignore="RelativeOverlap"/>
                 <ImageButton
-                        android:id="@+id/ibCustomCancel"
+                        android:id="@+id/customCancelImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
@@ -62,7 +62,7 @@
         />
 
         <EditText
-                android:id="@+id/inputNoteTitle"
+                android:id="@+id/noteTitleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"

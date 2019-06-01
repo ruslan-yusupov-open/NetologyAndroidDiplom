@@ -21,7 +21,7 @@
         >
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/activity_title"
+                        android:id="@+id/activityTitleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_note"
@@ -30,7 +30,7 @@
                         android:textColor="@android:color/white" android:textSize="30sp"
                         tools:ignore="RelativeOverlap"/>
                 <ImageButton
-                        android:id="@+id/ibCustomSave"
+                        android:id="@+id/customSaveImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
@@ -40,24 +40,24 @@
                         android:layout_alignParentEnd="true"
                 />
                 <ImageButton
-                        android:id="@+id/ibCustomCancel"
+                        android:id="@+id/customCancelImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
                         android:src="@android:drawable/ic_input_delete"
                         android:contentDescription="@string/settings"
                         android:layout_marginEnd="20sp"
-                        android:layout_toStartOf="@id/ibCustomSave"
+                        android:layout_toStartOf="@id/customSaveImageButton"
                 />
                 <ImageButton
-                        android:id="@+id/ibCustomDelete"
+                        android:id="@+id/customDeleteImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
                         android:src="@android:drawable/ic_delete"
                         android:contentDescription="@string/settings"
                         android:layout_marginEnd="20sp"
-                        android:layout_toStartOf="@id/ibCustomCancel"
+                        android:layout_toStartOf="@id/customCancelImageButton"
                 />
 
             </RelativeLayout>
@@ -66,68 +66,100 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--suppress AndroidDomInspection -->
-    <LinearLayout
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_notes_list"
-            tools:context=".NotesListActivity"
-            android:orientation="vertical"
-            android:padding="50dp">
+    >
 
-        <TextView
-                android:id="@+id/serveText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi!"
-                android:textSize="20sp"
-                android:layout_marginBottom="40sp"
-        />
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title"
-                android:textSize="24sp"
-        />
-
-        <EditText
-                android:id="@+id/inputNoteTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                tools:ignore="Autofill,LabelFor,TextFields"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text"
-                android:textSize="24sp"
-        />
-
-        <EditText
-                android:id="@+id/inputNoteText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                tools:ignore="Autofill,LabelFor,TextFields"/>
-
+        <!--suppress AndroidDomInspection -->
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40sp">
-            <CheckBox
+                tools:showIn="@layout/activity_notes_list"
+                tools:context=".NotesListActivity"
+                android:orientation="vertical"
+                android:padding="50dp">
+
+            <TextView
+                    android:id="@+id/serveTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="20sp"
+                    android:layout_marginBottom="40sp"
+            />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    android:textSize="24sp"
+            />
+
+            <EditText
+                    android:id="@+id/noteTitleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    tools:ignore="Autofill,LabelFor,TextFields"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/deadline"
+                    android:text="@string/text"
                     android:textSize="24sp"
             />
+
+            <EditText
+                    android:id="@+id/noteTextEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    tools:ignore="Autofill,LabelFor,TextFields"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40sp">
+                <CheckBox
+                        android:id="@+id/deadlineCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deadline"
+                        android:textSize="24sp"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40sp">
+                <EditText
+                        android:id="@+id/deadlineEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/deadline_day"
+                        android:layout_marginEnd="10sp"
+                        android:textSize="24sp"
+                        tools:ignore="Autofill,LabelFor,TextFields"/>
+                <ImageButton
+                        android:id="@+id/ibOpenCalendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@android:drawable/ic_menu_day"
+                        android:contentDescription="@string/settings"
+                />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

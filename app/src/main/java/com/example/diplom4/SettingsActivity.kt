@@ -10,6 +10,6 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        findViewById<ImageButton>(R.id.ibCustomCancel).setOnClickListener { finish() }
+        findViewById<ImageButton>(R.id.customCancelImageButton).setOnClickListener { finish() }
     }
 }
