@@ -115,6 +115,14 @@ class NoteEditActivity : AppCompatActivity() {
         noteForEdit.text = noteTextEditText.text.toString()
         val deadlineText = deadlineEditText.text.toString()
 
+        if (noteForEdit.title == "" && noteForEdit.text == "") {
+            Toast.makeText(
+                this@NoteEditActivity,
+                "Note must have not empty text or title", Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
         try {
             if (deadlineText == "" || !deadlineCheckbox.isChecked) {
                 noteForEdit.deadline = 0

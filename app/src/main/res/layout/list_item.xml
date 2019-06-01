@@ -19,6 +19,8 @@
 
             <TextView
                     android:id="@+id/textViewTitle"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Headline5"
@@ -26,6 +28,8 @@
 
             <TextView
                     android:id="@+id/textViewText"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Body1"

@@ -2,10 +2,8 @@ package com.example.diplom4
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.SimpleAdapter
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_notes_list.*
@@ -64,12 +62,20 @@ class NotesListActivity : AppCompatActivity() {
     }
 
     private fun createAdapter(): BaseAdapter {
-        return SimpleAdapter(
+        val sAdapter = SimpleAdapter(
             this,
             simpleAdapterContent,
             R.layout.list_item,
             arrayOf(TITLE, TEXT, DEADLINE), intArrayOf(R.id.textViewTitle, R.id.textViewText, R.id.textViewDeadline)
         )
+
+        sAdapter.viewBinder = SimpleAdapter.ViewBinder { view, data, _ ->
+            view.visibility = if (data.toString() == "") View.GONE else View.VISIBLE
+            (view as TextView).text = data.toString()
+            true
+        }
+
+        return sAdapter
     }
 
     private fun prepareContent(notes: List<NoteModel>) {
