@@ -13,9 +13,11 @@ data class NoteModel(
 
     var text: String,
 
-    var deadline: Long
+    var deadline: Long,
+
+    var updated: Long
 ) {
 
     @Ignore
-    constructor() : this(0, "", "", 0)
+    constructor() : this(0, "", "", 0, 0)
 }

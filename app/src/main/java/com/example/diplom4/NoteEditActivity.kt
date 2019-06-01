@@ -52,7 +52,7 @@ class NoteEditActivity : AppCompatActivity() {
                     datePickerDialog.dismiss()
                 },
                 todayCalendar.get(Calendar.YEAR),
-                todayCalendar.get(Calendar.MONTH),
+                todayCalendar.get(Calendar.MONTH)+1,
                 todayCalendar.get(Calendar.DAY_OF_MONTH)
             )
             datePickerDialog.show()
@@ -138,6 +138,8 @@ class NoteEditActivity : AppCompatActivity() {
             ).show()
             return
         }
+
+        noteForEdit.updated = Date().time
 
         if (isNew) {
             db.noteDao().insert(noteForEdit)

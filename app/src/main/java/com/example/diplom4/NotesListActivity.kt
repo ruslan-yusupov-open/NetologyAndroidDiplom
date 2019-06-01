@@ -85,8 +85,8 @@ class NotesListActivity : AppCompatActivity() {
             val row = HashMap<String, String>()
             row[TITLE] = note.title
             row[TEXT] = note.text
-            row[DEADLINE] =
-                if (note.deadline > 0) SimpleDateFormat("yyyy-M-d", Locale.US).format(Date(note.deadline)) else ""
+            row[DEADLINE] = if (note.deadline > 0)
+                SimpleDateFormat("yyyy-M-d", Locale.US).format(Date(note.deadline)) else ""
 
             simpleAdapterContent.add(row)
         }
@@ -100,7 +100,7 @@ class NotesListActivity : AppCompatActivity() {
     }
 
     private fun prepareData() {
-        notes = db.noteDao().all
+        notes = db.noteDao().withDeadlineSortedByDeadlineAsc + db.noteDao().withoutDeadlineSortedByUpdated
         prepareContent(notes)
     }
 
