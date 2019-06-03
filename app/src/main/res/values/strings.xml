@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Diplom4</string>
     <string name="title_activity_notes_list">NotesListActivity</string>
-    <string name="settings">Settings</string>
     <string name="edit_note">Edit note</string>
     <string name="title">Title</string>
     <string name="text">Text</string>
@@ -27,5 +26,4 @@
     <string name="yellow_circle">Yellow circle</string>
     <string name="save">SAVE</string>
     <string name="reset_pincode">Reset pincode</string>
-    <string name="settings">Settings</string>
 </resources>
