@@ -42,8 +42,7 @@
             tools:showIn="@layout/activity_notes_list"
             tools:context=".NotesListActivity"
             android:orientation="vertical"
-            android:layout_gravity="center"
-            android:padding="30dp">
+            android:layout_gravity="center">
 
         <TextView
                 android:layout_width="match_parent"
@@ -52,9 +51,9 @@
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:gravity="center"
                 android:textSize="24sp"
-                android:layout_marginBottom="50sp"
         />
-        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="60sp"
@@ -160,7 +159,7 @@
 
             <GridLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:columnCount="3"
                     android:layout_gravity="center"
             >
@@ -190,6 +189,8 @@
                 <Button android:id="@+id/buttonDel"
                         android:text="@string/back_arrow"/>
             </GridLayout>
+
+
         </LinearLayout>
 
     </LinearLayout>
