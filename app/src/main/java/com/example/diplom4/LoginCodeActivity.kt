@@ -29,7 +29,7 @@ class LoginCodeActivity : AppCompatActivity() {
         buttonDel.setOnClickListener { onClickDel() }
 
         if (!PincodeService(this).hasPin()) {
-            Toast.makeText(this, "please set pincode", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.please_set_pincode), Toast.LENGTH_LONG).show()
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
@@ -76,12 +76,12 @@ class LoginCodeActivity : AppCompatActivity() {
 
     private fun checkPinCode() {
         if (PincodeService(this).checkPin(pinString)) {
-            Toast.makeText(this, "pin code correct", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.pin_code_correct), Toast.LENGTH_LONG).show()
             val intent = Intent(this, NotesListActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            Toast.makeText(this, "pin code wrong", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.pin_code_wrong), Toast.LENGTH_LONG).show()
             while (counter > 0) onClickDel()
         }
     }

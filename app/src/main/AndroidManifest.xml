@@ -28,8 +28,6 @@
                 android:name=".NotesListActivity"
                 android:label="Notes List">
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
     </application>
 
 </manifest>

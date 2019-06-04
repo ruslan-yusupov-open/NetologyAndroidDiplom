@@ -32,7 +32,7 @@ class SettingsActivity : AppCompatActivity() {
         val pinString = pinEditText.text.toString()
 
         if (pinString.length != 4) {
-            Toast.makeText(this, "Pincode should be 4 digits", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.pincode_should_be_4_digits), Toast.LENGTH_LONG).show()
             return
         }
 

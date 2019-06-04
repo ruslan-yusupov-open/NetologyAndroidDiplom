@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_notes_list.*
 import kotlinx.android.synthetic.main.content_notes_list.*
 import java.text.SimpleDateFormat
@@ -16,19 +15,17 @@ class NotesListActivity : AppCompatActivity() {
     private var simpleAdapterContent: MutableList<Map<String, String>> = ArrayList()
 
     private lateinit var listContentAdapter: BaseAdapter
-    private lateinit var db: NoteDatabase
 
     private lateinit var notes: List<NoteModel>
+
+    private lateinit var notesService: NotesService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
         setSupportActionBar(mainToolbar)
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            NoteDatabase::class.java, "database"
-        ).allowMainThreadQueries().build()
+        notesService = NotesService(this)
 
         prepareData()
         initList(notesListView)
@@ -100,7 +97,7 @@ class NotesListActivity : AppCompatActivity() {
     }
 
     private fun prepareData() {
-        notes = db.noteDao().withDeadlineSortedByDeadlineAsc + db.noteDao().withoutDeadlineSortedByUpdated
+        notes = notesService.getSortedNotesList()
         prepareContent(notes)
     }
 

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_note_edit.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -17,11 +16,14 @@ class NoteEditActivity : AppCompatActivity() {
 
     private var isNew = true
     private lateinit var noteForEdit: NoteModel
-    private lateinit var db: NoteDatabase
+
+    private lateinit var notesService: NotesService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_edit)
+
+        notesService = NotesService(this)
 
         initNodeForEdit()
         initTooltipButtons()
@@ -66,15 +68,9 @@ class NoteEditActivity : AppCompatActivity() {
     private fun initNodeForEdit() {
         val noteId = intent.getIntExtra("noteId", 0)
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            NoteDatabase::class.java, "database"
-        ).allowMainThreadQueries().build()
-
-
         if (noteId > 0) {
             isNew = false
-            noteForEdit = db.noteDao().getById(noteId.toLong())
+            noteForEdit = notesService.getNoteById(noteId.toLong())
         } else {
             noteForEdit = NoteModel()
         }
@@ -90,12 +86,12 @@ class NoteEditActivity : AppCompatActivity() {
             customDeleteImageButton.setOnClickListener {
                 val builder = AlertDialog.Builder(this)
 
-                builder.setMessage("Do you want to delete this note?")
-                    .setTitle("Warning!")
+                builder.setMessage(getString(R.string.want_delete_note))
+                    .setTitle(getString(R.string.warning))
 
-                builder.setPositiveButton("YES") { _, _ -> deleteNote() }
+                builder.setPositiveButton(getString(R.string.yes)) { _, _ -> deleteNote() }
 
-                builder.setNegativeButton("NO") { _, _ -> }
+                builder.setNegativeButton(getString(R.string.no)) { _, _ -> }
 
                 builder.create().show()
             }
@@ -105,8 +101,8 @@ class NoteEditActivity : AppCompatActivity() {
     }
 
     private fun deleteNote() {
-        db.noteDao().delete(noteForEdit)
-        Toast.makeText(this@NoteEditActivity, "Note removed", Toast.LENGTH_LONG).show()
+        notesService.deleteNote(noteForEdit)
+        Toast.makeText(this@NoteEditActivity, getString(R.string.note_removed), Toast.LENGTH_LONG).show()
         finish()
     }
 
@@ -118,7 +114,7 @@ class NoteEditActivity : AppCompatActivity() {
         if (noteForEdit.title == "" && noteForEdit.text == "") {
             Toast.makeText(
                 this@NoteEditActivity,
-                "Note must have not empty text or title", Toast.LENGTH_LONG
+                getString(R.string.note_empty_text_or_title), Toast.LENGTH_LONG
             ).show()
             return
         }
@@ -134,7 +130,7 @@ class NoteEditActivity : AppCompatActivity() {
         } catch (e: ParseException) {
             Toast.makeText(
                 this@NoteEditActivity,
-                "Can't parse date, use format yyyy-MM-dd (2019-01-01)", Toast.LENGTH_LONG
+                getString(R.string.cant_parse_date), Toast.LENGTH_LONG
             ).show()
             return
         }
@@ -142,11 +138,11 @@ class NoteEditActivity : AppCompatActivity() {
         noteForEdit.updated = Date().time
 
         if (isNew) {
-            db.noteDao().insert(noteForEdit)
-            Toast.makeText(this@NoteEditActivity, "Note added", Toast.LENGTH_LONG).show()
+            notesService.insertNote(noteForEdit)
+            Toast.makeText(this@NoteEditActivity, getString(R.string.note_added), Toast.LENGTH_LONG).show()
         } else {
-            db.noteDao().update(noteForEdit)
-            Toast.makeText(this@NoteEditActivity, "Note updated", Toast.LENGTH_LONG).show()
+            notesService.updateNote(noteForEdit)
+            Toast.makeText(this@NoteEditActivity, getString(R.string.note_updated), Toast.LENGTH_LONG).show()
         }
 
         finish()

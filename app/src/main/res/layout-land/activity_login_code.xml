@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: add a landscape mode layout -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mainToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+        >
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notes_app"
+                        android:layout_marginTop="6sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@android:color/white" android:textSize="30sp"
+                        tools:ignore="RelativeOverlap"/>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--suppress AndroidDomInspection -->
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:showIn="@layout/activity_notes_list"
+            tools:context=".NotesListActivity"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="30dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/please_enter_pin_code"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_marginBottom="50sp"
+        />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="60sp"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:showIn="@layout/activity_notes_list"
+                    tools:context=".NotesListActivity"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    android:layout_marginBottom="30dp">
+
+                <FrameLayout
+                        android:id="@+id/frame1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/frame2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/yellow1"
+                            android:visibility="gone"
+                            tools:visibility="visible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_yellow"
+                            android:contentDescription="@string/yellow_circle"/>
+                    <ImageView
+                            android:id="@+id/black1"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            tools:visibility="gone"
+                            android:src="@drawable/circle_black"
+                            android:contentDescription="@string/circleblack"/>
+                </FrameLayout>
+
+                <FrameLayout
+                        android:id="@+id/frame2"
+                        app:layout_constraintTop_toBottomOf="@id/frame1"
+                        app:layout_constraintBottom_toTopOf="@id/frame3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/yellow2"
+                            android:visibility="gone"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_yellow"
+                            android:contentDescription="@string/yellow_circle"/>
+                    <ImageView
+                            android:id="@+id/black2"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_black"
+                            android:contentDescription="@string/circleblack"/>
+                </FrameLayout>
+
+
+                <FrameLayout
+                        android:id="@+id/frame3"
+                        app:layout_constraintTop_toBottomOf="@id/frame2"
+                        app:layout_constraintBottom_toTopOf="@id/frame4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/yellow3"
+                            android:visibility="gone"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_yellow"
+                            android:contentDescription="@string/yellow_circle"/>
+                    <ImageView
+                            android:id="@+id/black3"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_black"
+                            android:contentDescription="@string/circleblack"/>
+                </FrameLayout>
+
+                <FrameLayout
+                        android:id="@+id/frame4"
+                        app:layout_constraintTop_toBottomOf="@id/frame3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/yellow4"
+                            android:visibility="gone"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_yellow"
+                            android:contentDescription="@string/yellow_circle"/>
+                    <ImageView
+                            android:id="@+id/black4"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/circle_black"
+                            android:contentDescription="@string/circleblack"/>
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:columnCount="3"
+                    android:layout_gravity="center"
+            >
+                <Button android:id="@+id/digit1Button"
+                        android:text="@string/_1"/>
+                <Button android:id="@+id/digit2Button"
+                        android:text="@string/_2"/>
+                <Button android:id="@+id/digit3Button"
+                        android:text="@string/_3"/>
+                <Button android:id="@+id/digit4Button"
+                        android:text="@string/_4"/>
+                <Button android:id="@+id/digit5Button"
+                        android:text="@string/_5"/>
+                <Button android:id="@+id/digit6Button"
+                        android:text="@string/_6"/>
+                <Button android:id="@+id/digit7Button"
+                        android:text="@string/_7"/>
+                <Button android:id="@+id/digit8Button"
+                        android:text="@string/_8"/>
+                <Button android:id="@+id/digit9Button"
+                        android:text="@string/_9"/>
+                <Button android:id="@+id/digit0Button"
+                        android:layout_columnSpan="2"
+                        android:text="@string/_0"
+                        android:layout_gravity="end"
+                />
+                <Button android:id="@+id/buttonDel"
+                        android:text="@string/back_arrow"/>
+            </GridLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

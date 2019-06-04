@@ -22,13 +22,13 @@ class PincodeService(private val context: Context) {
 
         sharedPrefs.edit().putString("hashedPin", hashedString).apply()
         sharedPrefs.edit().putString("salt", salt).apply()
-        Toast.makeText(context, "pincode saved", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.pincode_saved), Toast.LENGTH_LONG).show()
     }
 
     fun resetPin() {
         sharedPrefs.edit().remove("hashedPin").apply()
         sharedPrefs.edit().remove("salt").apply()
-        Toast.makeText(context, "pincode reset", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.pincode_reset), Toast.LENGTH_LONG).show()
     }
 
     private fun hash(strToHash: String): String {

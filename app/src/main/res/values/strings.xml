@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diplom4</string>
+    <string name="app_name">Diplom</string>
     <string name="title_activity_notes_list">NotesListActivity</string>
     <string name="settings">Settings</string>
     <string name="edit_note">Edit note</string>
@@ -27,4 +27,19 @@
     <string name="yellow_circle">Yellow circle</string>
     <string name="save">SAVE</string>
     <string name="reset_pincode">Reset pincode</string>
+    <string name="note_added">Note added</string>
+    <string name="note_updated">Note updated</string>
+    <string name="cant_parse_date">Can`t parse date, use format yyyy–MM–dd (2019–01–01)</string>
+    <string name="note_empty_text_or_title">Note must have not empty text or title</string>
+    <string name="note_removed">Note removed</string>
+    <string name="want_delete_note">Do you want to delete this note?</string>
+    <string name="warning">Warning!</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="pin_code_correct">pin code correct</string>
+    <string name="pin_code_wrong">pin code wrong</string>
+    <string name="please_set_pincode">please set pincode</string>
+    <string name="pincode_saved">pincode saved</string>
+    <string name="pincode_reset">pincode reset</string>
+    <string name="pincode_should_be_4_digits">Pincode should be 4 digits</string>
 </resources>
